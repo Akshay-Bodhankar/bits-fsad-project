@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require("uuid");
 
 const login = async (req, res) => {
-    console.log("Inside login function");
+    logger.info("Inside login function");
     const { userName, password } = req.body;
     try {
         const user = await userModel.findOne({ userName: userName });
@@ -36,7 +36,7 @@ const login = async (req, res) => {
         });
     }
     catch (error) {
-        console.error("Error during login:", error);
+        logger.error("Error during login:", error);
         res.status(500).json({
             status: "error",
             statusCode: 500,
@@ -46,7 +46,7 @@ const login = async (req, res) => {
 };
 
 const getMe = async (req, res) => {
-    console.log("Inside getMe function");
+    logger.info("Inside getMe function");
     res.json({ user: req.user });
 };
 

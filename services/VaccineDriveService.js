@@ -20,7 +20,7 @@ const createVaccineDrive = async (req, res) => {
         })
         await vaccineDrive.save();
         logger.info("Vaccine drive created successfully " + vaccineDrive);
-        console.log("The vaccine drive is saved");
+        logger.info("The vaccine drive is saved");
         res.status(201).send({
             status: "success",
             statusCode: 201,
@@ -41,7 +41,7 @@ const listDrives = async (req, res) => {
     logger.info("Inside list drives functions");
     try {
         const vaccineDriveRecords = await vaccineDriveModel.find();
-        console.log("The vaccineDriveRecords: ", vaccineDriveRecords);
+        logger.info("The vaccineDriveRecords: ", vaccineDriveRecords);
         res.status(200).send({
             status: "success",
             statusCode: 200,
@@ -90,7 +90,7 @@ const getDriveByID = async (req, res) => {
         const { driveID } = req.params;
 
         const drive = await vaccineDriveModel.findOne({ id: driveID });
-        console.log("the drive is: ", drive);
+        logger.info("the drive is: ", drive);
         return res.status(200).json({
             status: "success",
             statusCode: 200,
@@ -133,7 +133,7 @@ const editDriveByID = async (req, res) => {
             new: true,
             runValidators: true
         })
-        console.log("The updated drive is: ", updatedDrive);
+        logger.info("The updated drive is: ", updatedDrive);
         return res.status(200).json({
             status: "success",
             statusCode: 200,
@@ -151,7 +151,7 @@ const editDriveByID = async (req, res) => {
 }
 
 const markDriveExpired = async (req, res) => {
-    console.log("Inside markDriveExpire");
+    logger.info("Inside markDriveExpire");
     try {
         const { driveID } = req.params;
 

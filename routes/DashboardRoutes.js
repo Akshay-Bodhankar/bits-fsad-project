@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const dashboardControllr = require("../controllers/DashboardController");
+const dashboardController = require("../controllers/DashboardController");
 const authMiddleware = require("../middlewares/authMiddleware");
 
 /**
@@ -78,7 +78,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
  *                   type: string
  *                   example: Internal Server Error
  */
-router.get("/overview", dashboardControllr.dashboardOverview);
+router.get("/overview", dashboardController.dashboardOverview);
 
 
 /**
@@ -152,5 +152,5 @@ router.get("/overview", dashboardControllr.dashboardOverview);
  *                   example: Database query failed
  */
 
-router.get("/stats", dashboardControllr.getStats);
+router.get("/stats", dashboardController.getStats);
 module.exports = router;

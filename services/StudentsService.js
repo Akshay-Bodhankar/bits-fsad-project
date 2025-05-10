@@ -3,7 +3,7 @@ const csv = require("csv-parser");
 const studentModel = require("../models/StudentsModel");
 
 const addStudent = async (req, res) => {
-    console.log("Inside addStudent function");
+    logger.info("Inside addStudent function");
     try {
         const { studentID, name, className, gender, dob, vaccinationRecords } = req.body;
 
@@ -34,7 +34,7 @@ const addStudent = async (req, res) => {
         });
     }
     catch (error) {
-        console.error("Error creating student:", error);
+        logger.error("Error creating student:", error);
         res.status(500).json({
             status: "error",
             statusCode: 500,
@@ -44,7 +44,7 @@ const addStudent = async (req, res) => {
 }
 
 const listStudents = async (req, res) => {
-    console.log("Inside listStudents function");
+    logger.info("Inside listStudents function");
     try {
         const { class: classFilter, name, status } = req.query;
         const filter = {};
@@ -70,7 +70,7 @@ const listStudents = async (req, res) => {
         });
     }
     catch (error) {
-        console.error("Error listing students:", error);
+        logger.error("Error listing students:", error);
         res.status(500).json({
             status: "error",
             statusCode: 500,
@@ -80,7 +80,7 @@ const listStudents = async (req, res) => {
 };
 
 const getStudentById = async (req, res) => {
-    console.log("Inside getStudentById function");
+    logger.info("Inside getStudentById function");
     try {
         const { studentID } = req.params;
 
@@ -100,7 +100,7 @@ const getStudentById = async (req, res) => {
         });
     }
     catch (error) {
-        console.error("Error retrieving student:", error);
+        logger.error("Error retrieving student:", error);
         res.status(500).json({
             status: "error",
             statusCode: 500,
@@ -110,7 +110,7 @@ const getStudentById = async (req, res) => {
 };
 
 const updateStudent = async (req, res) => {
-    console.log("Inside updateStudent function");
+    logger.info("Inside updateStudent function");
     try {
         const { studentID } = req.params;
         const updatedStudentInfo = req.body;
@@ -139,7 +139,7 @@ const updateStudent = async (req, res) => {
         });
     }
     catch (error) {
-        console.error("Error updating student:", error);
+        logger.error("Error updating student:", error);
         res.status(500).json({
             status: "error",
             statusCode: 500,
@@ -149,7 +149,7 @@ const updateStudent = async (req, res) => {
 }
 
 const bulkStudentUpload = async (req, res) => {
-    console.log("Inside bulkStudentUpload function");
+    logger.info("Inside bulkStudentUpload function");
     const file = req.file;
 
     if (!file) {
@@ -186,7 +186,7 @@ const bulkStudentUpload = async (req, res) => {
                     }
 
                     if (imported.length > 0) {
-                        console.log("imported", imported);
+                        logger.info("imported", imported);
                         await studentModel.insertMany(imported, { ordered: false, new: true });
                     }
 
@@ -201,7 +201,7 @@ const bulkStudentUpload = async (req, res) => {
                         skippedIds: skipped,
                     });
                 } catch (error) {
-                    console.error("DB insert error:", error);
+                    logger.error("DB insert error:", error);
                     return res.status(500).json({
                         status: "error",
                         statusCode: 500,
@@ -210,7 +210,7 @@ const bulkStudentUpload = async (req, res) => {
                 }
             })
             .on("error", (error) => {
-                console.error("CSV parsing error:", error);
+                logger.error("CSV parsing error:", error);
                 return res.status(400).json({
                     status: "error",
                     statusCode: 400,
@@ -218,7 +218,7 @@ const bulkStudentUpload = async (req, res) => {
                 });
             });
     } catch (err) {
-        console.error("Unexpected error:", err);
+        logger.error("Unexpected error:", err);
         return res.status(500).json({
             status: "error",
             statusCode: 500,
@@ -239,10 +239,10 @@ const vaccinateStudent = async (req, res) => {
             message: "driveId, vaccineName, and date are required",
         });
     }
-    console.log("studentID", studentID);
+    logger.info("studentID", studentID);
     try {
         const student = await studentModel.findOne({ studentID });
-        console.log("Student found:", student);
+        logger.info("Student found:", student);
         if (!student) {
             return res.status(404).json({
                 status: "error",
@@ -273,7 +273,7 @@ const vaccinateStudent = async (req, res) => {
             data: student,
         });
     } catch (err) {
-        console.error("Vaccination error:", err);
+        logger.error("Vaccination error:", err);
         return res.status(500).json({
             status: "error",
             statusCode: 500,

@@ -3,11 +3,11 @@ const envVars = require("./envVars");
 
 async function setUpDB() {
   try {
-    await mongoose.connect(`${envVars.db.url}student-vaccine-portal`).then(() => console.log('MongoDB connected'))
+    await mongoose.connect(`${envVars.db.url}student-vaccine-portal`).then(() => logger.info('MongoDB connected'))
       .catch((err) => { throw new Error(err) });;
-    // console.log("Connected to database");
+    // logger.info("Connected to database");
   } catch (err) {
-    console.log("Error connecting to database ", err.message);
+    logger.info("Error connecting to database ", err.message);
     throw new Error(err.message);
   }
 }

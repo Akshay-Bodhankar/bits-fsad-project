@@ -1,8 +1,5 @@
-const jwt = require("jsonwebtoken");
-const jwtConfig = require("../config/jwt");
 const vaccineDriveModel = require("../models/DriveModel");
 const studentModel = require("../models/StudentsModel.js");
-const { v4: uuidv4 } = require("uuid");
 const logger = require("../lib/logger.js");
 
 
@@ -90,23 +87,30 @@ const getStats = async (req, res) => {
         });
 
         const response = {
-            totalStudents: stats.totalStudents,
-            vaccinationByClass: Object.entries(stats.byClass).map(([cls, data]) => ({
-                class: cls,
-                total: data.total,
-                vaccinated: data.vaccinated,
-                vaccinatedPercent: ((data.vaccinated / data.total) * 100).toFixed(2)
-            })),
-            mostUsedVaccines: Object.entries(stats.topVaccines)
-                .map(([name, count]) => ({ name, count }))
-                .sort((a, b) => b.count - a.count)
+            status: "success",
+            statusCode: 201,
+            mesage: "Overview Fetched succesfully.",
+            data: {
+                totalStudents: stats.totalStudents,
+                vaccinationByClass: Object.entries(stats.byClass).map(([cls, data]) => ({
+                    class: cls,
+                    total: data.total,
+                    vaccinated: data.vaccinated,
+                    vaccinatedPercent: ((data.vaccinated / data.total) * 100).toFixed(2)
+                })),
+                mostUsedVaccines: Object.entries(stats.topVaccines)
+                    .map(([name, count]) => ({ name, count }))
+                    .sort((a, b) => b.count - a.count)
+            }
         };
 
         logger.info("Dashboard stats generated successfully");
-        res.status(200).json(response);
+        res.status(201).json(response);
     } catch (err) {
         logger.error("Error generating dashboard stats", { error: err.message });
         res.status(500).json({
+            status: "failed",
+            statusCode: 500,
             message: "Internal server error while generating dashboard statistics",
             error: err.message
         });

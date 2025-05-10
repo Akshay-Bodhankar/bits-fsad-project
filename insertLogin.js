@@ -12,7 +12,7 @@ async function insertLogin() {
                 role: 'coordinator'
             });
             await newUser.save();
-            console.log("User created successfully");
+            logger.info("User created successfully");
         }
     }
     catch (error) {
@@ -21,8 +21,8 @@ async function insertLogin() {
 }
 insertLogin()
     .then(() => {
-        console.log("Done");
+        logger.info("Done");
     })
     .catch((error) => {
-        console.error("Error executing insert login function:", error);
+        logger.error("Error executing insert login function:", error);
     });

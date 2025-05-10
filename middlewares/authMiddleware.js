@@ -3,7 +3,7 @@ const jwtConfig = require("../config/jwt");
 
 const authMiddleware = (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1];
-    console.log("Token: ", req.headers.authorization);
+    logger.info("Token: ", req.headers.authorization);
     if (!token) return res.status(401).json({
         status: "error",
         statusCode: 401,

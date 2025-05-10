@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'pug');
 
 const swaggerOptions = {
   definition: {
@@ -62,6 +62,9 @@ app.use("/students/", studentsRoutes);
 const dashboardRoute = require("./routes/DashboardRoutes.js");
 app.use("/dashboard/", dashboardRoute);
 
+const reportsRoute = require("./routes/ReportRoutes.js");
+app.use("/reports/", reportsRoute);
+
 app.get("/", function (req, res) {
   res.redirect("/api-docs");
 });
@@ -69,7 +72,7 @@ app.get("/", function (req, res) {
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  console.log("The path is: ", req.originalUrl);
+  logger.info("The path is: ", req.originalUrl);
   next(createError(404));
 });
 
