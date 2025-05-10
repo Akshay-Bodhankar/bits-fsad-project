@@ -1,11 +1,6 @@
 const fs = require("fs");
 const csv = require("csv-parser");
-const jwt = require("jsonwebtoken");
-const jwtConfig = require("../config/jwt");
 const studentModel = require("../models/StudentsModel");
-
-const { v4: uuidv4 } = require("uuid");
-
 
 const addStudent = async (req, res) => {
     console.log("Inside addStudent function");

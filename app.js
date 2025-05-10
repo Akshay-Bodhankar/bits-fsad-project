@@ -59,6 +59,9 @@ app.use("/api/", authRoutes);
 const studentsRoutes = require("./routes/StudentsRoutes.js");
 app.use("/students/", studentsRoutes);
 
+const dashboardRoute = require("./routes/DashboardRoutes.js");
+app.use("/dashboard/", dashboardRoute);
+
 app.get("/", function (req, res) {
   res.redirect("/api-docs");
 });
