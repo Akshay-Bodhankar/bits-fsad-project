@@ -2,9 +2,10 @@ const jwt = require("jsonwebtoken");
 const jwtConfig = require("../config/jwt");
 const vaccineDriveModel = require("../models/DriveModel");
 const { v4: uuidv4 } = require("uuid");
+const logger = require("../lib/logger.js");
 
 const createVaccineDrive = async (req, res) => {
-    console.log("Inside createVaccine drive: ")
+    logger.info("Inside createVaccine drive: ")
     const { vaccineName, date, avilableDoses, grades, isExpired } = req.body;
     const id = uuidv4();
 
@@ -18,6 +19,7 @@ const createVaccineDrive = async (req, res) => {
             isExpired
         })
         await vaccineDrive.save();
+        logger.info("Vaccine drive created successfully " + vaccineDrive);
         console.log("The vaccine drive is saved");
         res.status(201).send({
             status: "success",
@@ -26,6 +28,7 @@ const createVaccineDrive = async (req, res) => {
         });
     }
     catch (error) {
+        logger.error("Error creating vaccine drive: " + error);
         res.status(400).send({
             status: "failed",
             statusCode: 400,
@@ -35,7 +38,7 @@ const createVaccineDrive = async (req, res) => {
 }
 
 const listDrives = async (req, res) => {
-    console.log("Inside list drives functions");
+    logger.info("Inside list drives functions");
     try {
         const vaccineDriveRecords = await vaccineDriveModel.find();
         console.log("The vaccineDriveRecords: ", vaccineDriveRecords);
@@ -56,7 +59,7 @@ const listDrives = async (req, res) => {
 }
 
 const upcomingDrives = async (req, res) => {
-    console.log("Inside upcomingDrives");
+    logger.info("Inside upcomingDrives");
     try {
         const currentDate = new Date();
         const thirtyDaysLater = new Date();
@@ -82,7 +85,7 @@ const upcomingDrives = async (req, res) => {
 }
 
 const getDriveByID = async (req, res) => {
-    console.log("Inside getDriveByID");
+    logger.info("Inside getDriveByID");
     try {
         const { driveID } = req.params;
 
@@ -105,7 +108,7 @@ const getDriveByID = async (req, res) => {
 }
 
 const editDriveByID = async (req, res) => {
-    console.log("Inside editDriveByID");;
+    logger.info("Inside editDriveByID");;
     try {
         const { driveID } = req.params;
         const newDriveData = req.body;

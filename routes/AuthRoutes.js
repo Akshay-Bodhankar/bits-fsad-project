@@ -20,7 +20,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
  *   post:
  *     summary: Simulated login
  *     description: Authenticates user and returns a JWT token for use in protected services.
- *     tags: [Authentication]
+ *     tags: [Authentication APIs]
  *     requestBody:
  *       required: true
  *       content:
@@ -81,7 +81,7 @@ router.post("/login", authController.login);
  *   get:
  *     summary: Get current user info
  *     description: Returns the authenticated user's information based on the provided JWT token.
- *     tags: [Authentication]
+ *     tags: [Authentication APIs]
  *     security:
  *       - bearerAuth: []
  *     responses:

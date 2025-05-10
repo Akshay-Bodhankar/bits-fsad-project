@@ -56,6 +56,9 @@ app.use("/drives/", vaccineDriveRoute);
 const authRoutes = require("./routes/AuthRoutes.js");
 app.use("/api/", authRoutes);
 
+const studentsRoutes = require("./routes/StudentsRoutes.js");
+app.use("/students/", studentsRoutes);
+
 app.get("/", function (req, res) {
   res.redirect("/api-docs");
 });
