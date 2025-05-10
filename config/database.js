@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const envVars = require("./envVars");
+const logger = require("../lib/logger.js");
 
 async function setUpDB() {
   try {

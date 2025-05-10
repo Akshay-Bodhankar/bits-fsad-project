@@ -107,7 +107,7 @@ const getStats = async (req, res) => {
         logger.info("Dashboard stats generated successfully");
         res.status(201).json(response);
     } catch (err) {
-        logger.error("Error generating dashboard stats", { error: err.message });
+        logger.error("Error generating dashboard stats " + { error: err.message });
         res.status(500).json({
             status: "failed",
             statusCode: 500,

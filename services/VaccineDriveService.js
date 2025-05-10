@@ -90,7 +90,7 @@ const getDriveByID = async (req, res) => {
         const { driveID } = req.params;
 
         const drive = await vaccineDriveModel.findOne({ id: driveID });
-        logger.info("the drive is: ", drive);
+        logger.info("the drive is: " + drive);
         return res.status(200).json({
             status: "success",
             statusCode: 200,
@@ -133,7 +133,7 @@ const editDriveByID = async (req, res) => {
             new: true,
             runValidators: true
         })
-        logger.info("The updated drive is: ", updatedDrive);
+        logger.info("The updated drive is: " + updatedDrive);
         return res.status(200).json({
             status: "success",
             statusCode: 200,

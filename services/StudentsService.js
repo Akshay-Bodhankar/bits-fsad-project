@@ -1,6 +1,7 @@
 const fs = require("fs");
 const csv = require("csv-parser");
 const studentModel = require("../models/StudentsModel");
+const logger = require("../lib/logger.js");
 
 const addStudent = async (req, res) => {
     logger.info("Inside addStudent function");
@@ -34,7 +35,7 @@ const addStudent = async (req, res) => {
         });
     }
     catch (error) {
-        logger.error("Error creating student:", error);
+        logger.error("Error creating student: " + error);
         res.status(500).json({
             status: "error",
             statusCode: 500,
@@ -70,7 +71,7 @@ const listStudents = async (req, res) => {
         });
     }
     catch (error) {
-        logger.error("Error listing students:", error);
+        logger.error("Error listing students: " + error);
         res.status(500).json({
             status: "error",
             statusCode: 500,
@@ -100,7 +101,7 @@ const getStudentById = async (req, res) => {
         });
     }
     catch (error) {
-        logger.error("Error retrieving student:", error);
+        logger.error("Error retrieving student: " + error);
         res.status(500).json({
             status: "error",
             statusCode: 500,
@@ -139,7 +140,7 @@ const updateStudent = async (req, res) => {
         });
     }
     catch (error) {
-        logger.error("Error updating student:", error);
+        logger.error("Error updating student: " + error);
         res.status(500).json({
             status: "error",
             statusCode: 500,
@@ -201,7 +202,7 @@ const bulkStudentUpload = async (req, res) => {
                         skippedIds: skipped,
                     });
                 } catch (error) {
-                    logger.error("DB insert error:", error);
+                    logger.error("DB insert error: " + error);
                     return res.status(500).json({
                         status: "error",
                         statusCode: 500,
@@ -210,7 +211,7 @@ const bulkStudentUpload = async (req, res) => {
                 }
             })
             .on("error", (error) => {
-                logger.error("CSV parsing error:", error);
+                logger.error("CSV parsing error: " + error);
                 return res.status(400).json({
                     status: "error",
                     statusCode: 400,
@@ -218,7 +219,7 @@ const bulkStudentUpload = async (req, res) => {
                 });
             });
     } catch (err) {
-        logger.error("Unexpected error:", err);
+        logger.error("Unexpected error: " + err);
         return res.status(500).json({
             status: "error",
             statusCode: 500,
@@ -273,7 +274,7 @@ const vaccinateStudent = async (req, res) => {
             data: student,
         });
     } catch (err) {
-        logger.error("Vaccination error:", err);
+        logger.error("Vaccination error: " + err);
         return res.status(500).json({
             status: "error",
             statusCode: 500,

@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const jwtConfig = require("../config/jwt");
 const userModel = require("../models/UsersModel");
 const bcrypt = require('bcrypt');
+const logger = require("../lib/logger.js");
 
 const { v4: uuidv4 } = require("uuid");
 

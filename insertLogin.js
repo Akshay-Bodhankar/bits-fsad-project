@@ -1,5 +1,6 @@
 const userModel = require('./models/UsersModel');
 const bcrypt = require('bcrypt');
+const logger = require("./lib/logger.js");
 
 async function insertLogin() {
     try {

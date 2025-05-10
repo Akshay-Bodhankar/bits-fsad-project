@@ -2,6 +2,7 @@ const { Parser } = require("json2csv");
 const ExcelJS = require("exceljs");
 const PDFDocument = require("pdfkit");
 const studnetModel = require("../models/StudentsModel");
+const logger = require("../lib/logger.js");
 
 const getFilteredReports = async (req, res) => {
     try {
@@ -60,7 +61,7 @@ const getFilteredReports = async (req, res) => {
             }
         });
     } catch (error) {
-        logger.error("Report Error:", error);
+        logger.error("Report Error: " + error);
         res.status(500).send({
             status: "failed",
             statusCode: 500,
@@ -159,13 +160,12 @@ const exportReports = async (req, res) => {
         });
 
     } catch (error) {
-        logger.error("Export Error:", error);
+        logger.error("Export Error: " + error);
         res.status(500).send({
             status: "failed",
             statusCode: 500,
             errorMessage: "Error occured while creating vaccine drive: " + error
         });
-        res.status(500).json({ message: "Internal Server Error" });
     }
 };
 
