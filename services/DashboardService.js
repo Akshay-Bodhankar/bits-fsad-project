@@ -52,6 +52,68 @@ const dashboardOverview = async (req, res) => {
     }
 
 };
+
+const getStats = async (req, res) => {
+    try {
+        const students = await studentModel.find({});
+        const drives = await vaccineDriveModel.find({});
+
+        if (!students.length || !drives.length) {
+            logger.warn("No students or drives found for stats");
+            return res.status(404).json({ message: "No students or drives found" });
+        }
+
+        const stats = {
+            totalStudents: students.length,
+            byClass: {},
+            topVaccines: {}
+        };
+
+        students.forEach(student => {
+            const cls = student.class;
+            if (!stats.byClass[cls]) {
+                stats.byClass[cls] = { total: 0, vaccinated: 0 };
+            }
+
+            stats.byClass[cls].total += 1;
+
+            if (student.vaccinationRecords?.length) {
+                stats.byClass[cls].vaccinated += 1;
+
+                student.vaccinationRecords.forEach(record => {
+                    const vaccine = record.vaccineName;
+                    if (vaccine) {
+                        stats.topVaccines[vaccine] = (stats.topVaccines[vaccine] || 0) + 1;
+                    }
+                });
+            }
+        });
+
+        const response = {
+            totalStudents: stats.totalStudents,
+            vaccinationByClass: Object.entries(stats.byClass).map(([cls, data]) => ({
+                class: cls,
+                total: data.total,
+                vaccinated: data.vaccinated,
+                vaccinatedPercent: ((data.vaccinated / data.total) * 100).toFixed(2)
+            })),
+            mostUsedVaccines: Object.entries(stats.topVaccines)
+                .map(([name, count]) => ({ name, count }))
+                .sort((a, b) => b.count - a.count)
+        };
+
+        logger.info("Dashboard stats generated successfully");
+        res.status(200).json(response);
+    } catch (err) {
+        logger.error("Error generating dashboard stats", { error: err.message });
+        res.status(500).json({
+            message: "Internal server error while generating dashboard statistics",
+            error: err.message
+        });
+    }
+}
+
 module.exports = {
-    dashboardOverview
+    dashboardOverview,
+    getStats
 };

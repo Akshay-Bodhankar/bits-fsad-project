@@ -81,5 +81,76 @@ const authMiddleware = require("../middlewares/authMiddleware");
 router.get("/overview", dashboardControllr.dashboardOverview);
 
 
+/**
+ * @swagger
+ * /dashboard/stats:
+ *   get:
+ *     summary: Get detailed aggregated dashboard statistics
+ *     description: Returns total student count, class-wise vaccination stats, and most-used vaccines.
+ *     tags: [Dashboard APIs]
+ *     responses:
+ *       200:
+ *         description: Dashboard statistics data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 totalStudents:
+ *                   type: integer
+ *                   example: 120
+ *                 vaccinationByClass:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       class:
+ *                         type: string
+ *                         example: "5"
+ *                       total:
+ *                         type: integer
+ *                         example: 30
+ *                       vaccinated:
+ *                         type: integer
+ *                         example: 27
+ *                       vaccinatedPercent:
+ *                         type: string
+ *                         example: "90.00"
+ *                 mostUsedVaccines:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       name:
+ *                         type: string
+ *                         example: "MMR"
+ *                       count:
+ *                         type: integer
+ *                         example: 45
+ *       404:
+ *         description: No students or drives found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: No students or drives found
+ *       500:
+ *         description: Internal server error while generating dashboard statistics
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Internal server error while generating dashboard statistics
+ *                 error:
+ *                   type: string
+ *                   example: Database query failed
+ */
 
+router.get("/stats", dashboardControllr.getStats);
 module.exports = router;
