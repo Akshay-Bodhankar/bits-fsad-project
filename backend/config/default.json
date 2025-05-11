@@ -1,0 +1,7 @@
+{
+    "logConfig": {
+        "logFolder": ".//logs//",
+        "logFile": "student-vaccination-portal-service-server-%DATE%.log",
+        "logLevel": "info"
+    }
+}
