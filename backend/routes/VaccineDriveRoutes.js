@@ -74,7 +74,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
  *       500:
  *         description: Failed create drive
  */
-router.post("/",authMiddleware, vaccineDriveController.createVaccineDrive);
+router.post("/", vaccineDriveController.createVaccineDrive);
 
 /**
  * @swagger
@@ -126,7 +126,7 @@ router.post("/",authMiddleware, vaccineDriveController.createVaccineDrive);
  *       500:
  *         description: Failed to query
  */
-router.get("/", authMiddleware, vaccineDriveController.listVaccineDrive);
+router.get("/", vaccineDriveController.listVaccineDrive);
 
 /**
  * @swagger
@@ -178,7 +178,7 @@ router.get("/", authMiddleware, vaccineDriveController.listVaccineDrive);
  *       500:
  *         description: Failed to query
  */
-router.get("/upcoming", authMiddleware, vaccineDriveController.upcomingDrive);
+router.get("/upcoming", vaccineDriveController.upcomingDrive);
 
 /**
  * @swagger
@@ -238,7 +238,7 @@ router.get("/upcoming", authMiddleware, vaccineDriveController.upcomingDrive);
  *       500:
  *         description: Failed to fetch drive details
  */
-router.get("/:driveID", authMiddleware, vaccineDriveController.getDriveByID);
+router.get("/:driveID", vaccineDriveController.getDriveByID);
 
 /**
  * @swagger
@@ -306,7 +306,7 @@ router.get("/:driveID", authMiddleware, vaccineDriveController.getDriveByID);
  *       500:
  *         description: Failed to update drive
  */
-router.put("/:driveID", authMiddleware, vaccineDriveController.editDriveByID);
+router.put("/:driveID", vaccineDriveController.editDriveByID);
 
 /**
  * @swagger
@@ -380,6 +380,6 @@ router.put("/:driveID", authMiddleware, vaccineDriveController.editDriveByID);
  *         description: Failed to disable drive
  */
 
-router.put("/:driveID/disable", authMiddleware, vaccineDriveController.markDriveExpired);
+router.put("/:driveID/disable", vaccineDriveController.markDriveExpired);
 
 module.exports = router;

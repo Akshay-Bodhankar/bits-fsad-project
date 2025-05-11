@@ -10,6 +10,8 @@ const authMiddleware = require("../middlewares/authMiddleware");
  *     summary: Get filtered vaccination report
  *     description: Returns a list of student vaccination records filtered by vaccine name and/or date range, with pagination support.
  *     tags: [Reports]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: query
  *         name: vaccineName
@@ -112,6 +114,8 @@ router.get("/", reportController.getFilteredReports);
  *     summary: Export vaccination reports
  *     description: Exports student vaccination reports filtered by vaccine name and/or date range in CSV, PDF, or Excel format.
  *     tags: [Reports]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: query
  *         name: format

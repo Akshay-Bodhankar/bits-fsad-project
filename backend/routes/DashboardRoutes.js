@@ -23,6 +23,8 @@ const authMiddleware = require("../middlewares/authMiddleware");
  *     summary: Get dashboard overview metrics
  *     description: Returns total students, vaccinated count, vaccinated percentage, number of upcoming drives, and list of upcoming drives.
  *     tags: [Dashboard APIs]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Dashboard overview metrics
@@ -88,6 +90,8 @@ router.get("/overview", dashboardController.dashboardOverview);
  *     summary: Get detailed aggregated dashboard statistics
  *     description: Returns total student count, class-wise vaccination stats, and most-used vaccines.
  *     tags: [Dashboard APIs]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Dashboard statistics data

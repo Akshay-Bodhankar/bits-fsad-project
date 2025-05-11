@@ -63,6 +63,8 @@ const upload = require('../middlewares/upload');
  *     summary: Add a new student
  *     description: Creates a new student with optional vaccination records.
  *     tags: [Students APIs]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -141,6 +143,8 @@ router.post("/", studentsController.addStudent);
  *     summary: Get list of students
  *     description: Retrieve a list of students with optional filters for class, name, and vaccination status.
  *     tags: [Students APIs]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: query
  *         name: class
@@ -194,6 +198,8 @@ router.get("/", studentsController.listStudents);
  *     summary: Get student details by ID
  *     description: Retrieve details of a single student using their studentId.
  *     tags: [Students APIs]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -279,6 +285,8 @@ router.get("/:studentID", studentsController.getStudentById);
  *     summary: Edit student details
  *     description: Update the details of an existing student using their studentId.
  *     tags: [Students APIs]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -370,6 +378,8 @@ router.put("/:studentID", studentsController.updateStudent);
  *     summary: Bulk import students from CSV
  *     description: Upload a CSV file to bulk import student records.
  *     tags: [Students APIs]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -440,6 +450,8 @@ router.post("/import", upload.single("file"), studentsController.bulkStudentUplo
  *     summary: Mark a student as vaccinated for a drive
  *     description: Adds a vaccination record to a student based on studentID. Prevents duplicate entries for the same drive.
  *     tags: [Students APIs]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id

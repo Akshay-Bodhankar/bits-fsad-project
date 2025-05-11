@@ -27,7 +27,7 @@ var server = http.createServer(app);
  */
 
 server.listen(port, '0.0.0.0', () => {
-  logger.info("The server is listening on the port: ", port);
+  logger.info("The server is listening on the port: " + port);
   // logger.info("The server is listening on the port: " + port);
 });
 server.on('error', onError);
