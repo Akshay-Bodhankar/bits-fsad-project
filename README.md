@@ -128,15 +128,6 @@ npm start
 
 **https://github.com/Akshay-Bodhankar/bits-fsad-project.git**
 
-README includes:
-
-* Project summary
-* Technologies
-* Setup instructions
-* Run commands
-* Demo video link
-* Screenshots
-
 ---
 
 ## 10. Key Learnings
