@@ -27,13 +27,8 @@ The application is structured into modular layers inside a single backend servic
 * `dashboard`: Aggregate stats and insights
 * `reports`: Filtered data and export options
 
-### Deployment:
 
-* Docker container
-* Kubernetes YAML for pods, services, deployments
-* Shell scripts for local cluster automation
 
-*(Insert Architecture Diagram Here)*
 
 ---
 
@@ -56,7 +51,6 @@ The application is structured into modular layers inside a single backend servic
 * Swagger UI available at: `http://localhost:4000/api-docs`
 * Includes full documentation of all routes, responses, parameters, and status codes.
 
-*(Attach screenshots of Swagger or exported Postman collection)*
 
 ---
 
@@ -94,7 +88,6 @@ The application is structured into modular layers inside a single backend servic
 }
 ```
 
-*(Optional: Include a diagram or screenshot of data model relationships)*
 
 ---
 
@@ -107,29 +100,17 @@ The application is structured into modular layers inside a single backend servic
 
 ---
 
-## 7. UI/UX Wireframes (Optional)
 
-Attach any sketches, Figma mockups, or basic wireframes (optional but recommended).
-
----
 
 ## 8. Run Instructions
 
 ### Backend Setup:
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/Akshay-Bodhankar/bits-fsad-project.git
 cd backend
 npm install
 npm run dev
-```
-
-**.env file:**
-
-```
-PORT=4000
-MONGO_URI=mongodb://localhost:27017/school-db
-JWT_SECRET=your-secret-key
 ```
 
 ### Frontend Setup:
@@ -142,27 +123,10 @@ npm start
 
 ---
 
-## 9. Screenshots
 
-Include the following:
+## 9. GitHub Repository
 
-* UI screens (dashboard, students, drives)
-* Swagger UI
-* Postman API responses
-
----
-
-## 10. Video Demonstration
-
-**\[Google Drive Link to Demo Video]**
-
-* Covers user login, student management, drive creation, vaccination process, dashboard, and report generation.
-
----
-
-## 11. GitHub Repository
-
-**\[GitHub Link]**
+**https://github.com/Akshay-Bodhankar/bits-fsad-project.git**
 
 README includes:
 
@@ -175,7 +139,7 @@ README includes:
 
 ---
 
-## 12. Key Learnings
+## 10. Key Learnings
 
 * 📦 **Modular Service Design:** Learned how to structure a full-stack backend by modularizing microservice logic into isolated domains (auth, students, drives, dashboard, reports) within a single Express service.
 
