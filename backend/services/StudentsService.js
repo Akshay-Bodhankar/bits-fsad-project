@@ -273,7 +273,17 @@ const vaccinateStudent = async (req, res) => {
                 message: "Vaccination drive not found",
             });
         }
+        const allowedGrades = drive.grades.split(',').map(g => g.trim());
 
+        // Validate student class against allowed grades
+        if (!allowedGrades.includes(student.class)) {
+            return res.status(403).json({
+                status: "error",
+                statusCode: 403,
+                message: `Student of class ${student.class} is not eligible for this drive`
+            });
+        }
+        
         if (drive.availableDoses <= 0) {
             return res.status(400).json({
                 status: "error",

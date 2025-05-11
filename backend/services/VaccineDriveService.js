@@ -111,7 +111,8 @@ const editDriveByID = async (req, res) => {
     logger.info("Inside editDriveByID");;
     try {
         const { driveID } = req.params;
-        const newDriveData = req.body;
+        let newDriveData = req.body;
+        newDriveData.availableDoses = newDriveData.avilableDoses
         const drive = await vaccineDriveModel.findOne({ id: driveID });
 
         if (!drive) {
