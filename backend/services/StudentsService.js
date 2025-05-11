@@ -1,6 +1,7 @@
 const fs = require("fs");
 const csv = require("csv-parser");
 const studentModel = require("../models/StudentsModel");
+const driveModel = require("../models/DriveModel");
 const logger = require("../lib/logger.js");
 
 const addStudent = async (req, res) => {
@@ -263,6 +264,26 @@ const vaccinateStudent = async (req, res) => {
                 message: "Student already vaccinated for this drive",
             });
         }
+
+        const drive = await driveModel.findOne({ id: driveId });
+        if (!drive) {
+            return res.status(404).json({
+                status: "error",
+                statusCode: 404,
+                message: "Vaccination drive not found",
+            });
+        }
+
+        if (drive.availableDoses <= 0) {
+            return res.status(400).json({
+                status: "error",
+                statusCode: 400,
+                message: "No available doses left for this drive",
+            });
+        }
+
+        drive.availableDoses -= 1;
+        await drive.save();
 
         student.vaccinationRecords.push({ driveId, vaccineName, date });
         await student.save();

@@ -14,7 +14,7 @@ const createVaccineDrive = async (req, res) => {
             id,
             vaccineName: vaccineName,
             date,
-            avilableDoses,
+            availableDoses: avilableDoses,
             grades,
             isExpired
         })
@@ -41,7 +41,7 @@ const listDrives = async (req, res) => {
     logger.info("Inside list drives functions");
     try {
         const vaccineDriveRecords = await vaccineDriveModel.find();
-        logger.info("The vaccineDriveRecords: ", vaccineDriveRecords);
+        logger.info("The vaccineDriveRecords: " + vaccineDriveRecords);
         res.status(200).send({
             status: "success",
             statusCode: 200,

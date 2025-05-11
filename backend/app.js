@@ -34,9 +34,9 @@ const swaggerOptions = {
   definition: {
     openapi: "3.0.3",
     info: {
-      title: "DRIVE SERVICE APIS",
+      title: "School Vaccination APIS",
       version: "1.0.0",
-      description: "APIs for managing drives",
+      description: "APIs for managing school vaccination drives",
     },
     servers: [
       {

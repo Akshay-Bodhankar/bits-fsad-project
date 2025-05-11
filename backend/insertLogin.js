@@ -4,7 +4,7 @@ const logger = require("./lib/logger.js");
 
 async function insertLogin() {
     try {
-        const password = await bcrypt.hash('123456', 10);
+        const password = await bcrypt.hash('admin', 10);
         const user = await userModel.findOne({ userName: "admin" });
         if (!user) {
             const newUser = new userModel({
