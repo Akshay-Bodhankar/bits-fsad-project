@@ -159,13 +159,14 @@ function StudentManagement() {
       console.log(response)
       console.log(response.status)
       console.log(response.data)
-      if (response.data.status === 201) {
+      if (response.data.statusCode === 201) {
         setIsAddStudentModalOpen(false)
         resetForm()
         fetchStudents()
       }
     } catch (error) {
       console.error('Error adding student:', error)
+      alert('Error adding student: ' + error.response?.data?.message || 'Unknown error')
     } finally {
       setSubmitting(false)
     }
